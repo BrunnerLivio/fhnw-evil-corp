@@ -20,9 +20,6 @@ import org.controlsfx.control.textfield.CustomTextField;
 
 import com.meco.evil.BaseUI;
 import com.meco.evil.pm.ApplicationPM;
-import com.meco.evil.pm.BirdOverviewPM;
-import com.meco.evil.pm.i18n.I18nLanguage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -86,8 +83,6 @@ public class HeaderUI extends HBox implements BaseUI {
                 !applicationPM.getImageIsGrayscale().get());
         this.btnPixelated.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
                 !applicationPM.getImageIsPixelated().get());
-
-        changeLanguageBtnSelection(applicationPM.getI18n().getCurrentLanguage().getValue());
     }
 
     @Override
@@ -172,7 +167,8 @@ public class HeaderUI extends HBox implements BaseUI {
         return false;
     }
 
-    private void changeLanguageBtnSelection(I18nLanguage newValue) {
+    @Override
+    public void setupValueChangedListeners() {
         this.applicationPM.getImageIsBw().addListener((obs, oldVal, newVal) -> {
             this.btnBW.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !newVal);
         });
@@ -184,11 +180,6 @@ public class HeaderUI extends HBox implements BaseUI {
         this.applicationPM.getImageIsPixelated().addListener((obs, oldVal, newVal) -> {
             this.btnPixelated.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !newVal);
         });
-    }
-
-    @Override
-    public void setupValueChangedListeners() {
-
     }
 
     @Override
