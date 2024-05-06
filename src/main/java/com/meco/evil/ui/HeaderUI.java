@@ -5,12 +5,15 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.ObjectProperty;
 import javafx.css.PseudoClass;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -20,11 +23,15 @@ import com.meco.evil.pm.ApplicationPM;
 import com.meco.evil.pm.BirdOverviewPM;
 import com.meco.evil.pm.i18n.I18nLanguage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class HeaderUI extends HBox implements BaseUI {
     private ApplicationPM applicationPM;
@@ -71,7 +78,13 @@ public class HeaderUI extends HBox implements BaseUI {
         btnDiscard = new Button("Discard");
         btnDiscard.getStyleClass().add("button-secondary");
         btnDownload = new Button("Dowload");
-        
+
+        this.btnBW.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !applicationPM.getImageIsBw().get());
+        this.btnGreyScale.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
+                !applicationPM.getImageIsGrayscale().get());
+        this.btnPixelated.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
+                !applicationPM.getImageIsPixelated().get());
+
         changeLanguageBtnSelection(applicationPM.getI18n().getCurrentLanguage().getValue());
     }
 
@@ -83,34 +96,81 @@ public class HeaderUI extends HBox implements BaseUI {
         buttonBarLeft.getChildren().addAll(
                 btnPixelated,
                 btnBW,
-                btnGreyScale
-        );
+                btnGreyScale);
         HBox.setHgrow(buttonBarLeft, Priority.ALWAYS);
         var buttonBarRight = new HBox();
         buttonBarRight.getStyleClass().add("header-right");
         buttonBarRight.setSpacing(10);
         buttonBarRight.getChildren().addAll(
                 btnDiscard,
-                btnDownload
-        );
+                btnDownload);
         getChildren().addAll(
                 buttonBarLeft,
-                buttonBarRight
-        );
+                buttonBarRight);
     }
 
     @Override
     public void setupEventHandlers() {
-        btnDiscard.setOnAction(e -> {});
-        btnDownload.setOnAction(e -> {});
-        btnPixelated.setOnAction(e -> {});
-        // this.birdOverviewPM.currentSelection().addListener((observable, oldValue, newValue) -> {
-        //     this.btnGreyScale.setDisable(newValue == null);
-        // });
+        this.btnBW.setOnAction(e -> {
+            applicationPM.getImageIsBw().set(!applicationPM.getImageIsBw().get());
+            this.btnBW.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
+                    !applicationPM.getImageIsBw().get());
+        });
+        this.btnGreyScale.setOnAction(e -> {
+            applicationPM.getImageIsGrayscale().set(!applicationPM.getImageIsGrayscale().get());
+            this.btnGreyScale.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
+                    !applicationPM.getImageIsGrayscale().get());
+        });
+        this.btnPixelated.setOnAction(e -> {
+            applicationPM.getImageIsPixelated().set(!applicationPM.getImageIsPixelated().get());
+            this.btnPixelated.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"),
+                    !applicationPM.getImageIsPixelated().get());
+        });
+        this.btnDiscard.setOnAction(e -> {
+            this.removeImage();
+        });
+        this.btnDownload.setOnAction(e -> {
+            saveImage(SwingFXUtils.fromFXImage(this.applicationPM.getCurrentProcessedImage().get(), null));
+            this.removeImage();
+        });
+    }
+
+    private void removeImage() {
+        this.applicationPM.getCurrentImage().set(null);
+        this.applicationPM.getImageIsBw().set(false);
+        this.applicationPM.getImageIsGrayscale().set(false);
+        this.applicationPM.getImageIsPixelated().set(false);
+    }
+
+    private void saveImage(BufferedImage bufferedImage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            try {
+                ImageIO.write(bufferedImage, "png", file);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void changeLanguageBtnSelection(I18nLanguage newValue) {
+        this.applicationPM.getImageIsBw().addListener((obs, oldVal, newVal) -> {
+            this.btnBW.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !newVal);
+        });
 
+        this.applicationPM.getImageIsGrayscale().addListener((obs, oldVal, newVal) -> {
+            this.btnGreyScale.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !newVal);
+        });
+
+        this.applicationPM.getImageIsPixelated().addListener((obs, oldVal, newVal) -> {
+            this.btnPixelated.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), !newVal);
+        });
     }
 
     @Override

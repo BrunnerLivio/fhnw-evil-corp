@@ -20,11 +20,11 @@ import java.awt.event.KeyEvent;
 
 
 public class ApplicationUI extends StackPane {
+
     private final ApplicationPM model;
     private MasterDetailPane mainView;
     private HeaderUI headerUI;
     private FileUploadOverview fileUploadOverview;
-    private BirdPM birdPm;
     private VBox main;
 
     public ApplicationUI(ApplicationPM model) {
@@ -67,15 +67,12 @@ public class ApplicationUI extends StackPane {
     }
 
     private void setupEventHandlers() {
-        // this.headerUI.btnRemoveOnAction().set(event -> removeCurrentSelection());
-        // this.headerUI.btnAddOnAction().set(onChange());
     }
 
     private void setupValueChangedListeners() {
     }
 
     private void showDetailViewWithCurrentBird() {
-
     }
 
     private void removeCurrentSelection() {
