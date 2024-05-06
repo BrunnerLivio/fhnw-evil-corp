@@ -21,7 +21,7 @@ public class ApplicationPM {
                 put(I18nLanguage.EN, "en.csv");
             }}
     );
-    private final StringProperty applicationTitle = new SimpleStringProperty("TwitterFX");
+    private final StringProperty applicationTitle = new SimpleStringProperty("EVIL Shit");
 
     public String getApplicationTitle() {
         return applicationTitle.get();

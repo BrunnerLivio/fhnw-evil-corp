@@ -81,6 +81,13 @@
     -fx-background-radius: 0px;
 }
 
+.button-secondary {
+    -fx-background-color: white;
+    -fx-border-color: #006699;
+    -fx-text-fill: #006699;
+    -fx-background-radius: 0px;
+}
+
 .button:selected {
     -fx-background-color: #757575;
     -fx-text-fill: white;

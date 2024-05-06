@@ -29,16 +29,12 @@ import java.awt.*;
 public class HeaderUI extends HBox implements BaseUI {
     private ApplicationPM applicationPM;
     private BirdOverviewPM birdOverviewPM;
-    private Button btnSave;
-    private Button btnAdd;
-    private Button btnRemove;
-    private Button btnUndo;
-    private Button btnRedo;
-    private Button btnDe;
-    private Button btnEn;
-    private Button btnHelp;
-    private CustomTextField txtSearch;
-    private PauseTransition searchDebounce = new PauseTransition(Duration.seconds(0.5));
+    private Button btnPixelated;
+    private Button btnBW;
+    private Button btnGreyScale;
+
+    private Button btnDiscard;
+    private Button btnDownload;
 
     public HeaderUI(BirdOverviewPM birdOverviewPM, ApplicationPM applicationPM) {
         this.birdOverviewPM = birdOverviewPM;
@@ -52,11 +48,11 @@ public class HeaderUI extends HBox implements BaseUI {
     }
 
     public ObjectProperty<EventHandler<? super MouseEvent>> btnRemoveOnAction() {
-        return btnRemove.onMouseClickedProperty();
+        return btnGreyScale.onMouseClickedProperty();
     }
 
     public ObjectProperty<EventHandler<? super MouseEvent>> btnAddOnAction() {
-        return btnAdd.onMouseClickedProperty();
+        return btnBW.onMouseClickedProperty();
     }
 
     @Override
@@ -71,42 +67,34 @@ public class HeaderUI extends HBox implements BaseUI {
 
     @Override
     public void initializeControls() {
-        btnSave = new Button("", GlyphsDude.createIcon(FontAwesomeIcon.SAVE));
-        btnAdd = new Button("", GlyphsDude.createIcon(FontAwesomeIcon.PLUS));
-        btnRemove = new Button("", GlyphsDude.createIcon(FontAwesomeIcon.TRASH));
-        btnRemove.setDisable(true);
-        btnUndo = new Button("", GlyphsDude.createIcon(FontAwesomeIcon.ARROW_CIRCLE_ALT_LEFT));
-        btnRedo = new Button("", GlyphsDude.createIcon(FontAwesomeIcon.ARROW_CIRCLE_ALT_RIGHT));
-        btnDe = new Button("DE");
-        btnEn = new Button("EN");
-        btnHelp = new Button("Info", GlyphsDude.createIcon(FontAwesomeIcon.QUESTION));
-        txtSearch = new CustomTextField();
-        txtSearch.setLeft(GlyphsDude.createIcon(FontAwesomeIcon.SEARCH));
+        btnPixelated = new Button("Pixelated");
+        btnBW = new Button("Black & White");
+        btnGreyScale = new Button("Greyscale");
+        btnDiscard = new Button("Discard");
+        btnDiscard.getStyleClass().add("button-secondary");
+        btnDownload = new Button("Dowload");
+        
         changeLanguageBtnSelection(applicationPM.getI18n().getCurrentLanguage().getValue());
     }
 
     @Override
     public void layoutControls() {
         var buttonBarLeft = new HBox();
+
         buttonBarLeft.setSpacing(10);
         buttonBarLeft.getChildren().addAll(
-                btnSave,
-                btnAdd,
-                btnRemove,
-                btnUndo,
-                btnRedo
+                btnPixelated,
+                btnBW,
+                btnGreyScale
         );
         HBox.setHgrow(buttonBarLeft, Priority.ALWAYS);
         var buttonBarRight = new HBox();
         buttonBarRight.getStyleClass().add("header-right");
         buttonBarRight.setSpacing(10);
         buttonBarRight.getChildren().addAll(
-                btnHelp,
-                btnDe,
-                btnEn,
-                txtSearch
+                btnDiscard,
+                btnDownload
         );
-        btnHelp.getStyleClass().add("info-button");
         getChildren().addAll(
                 buttonBarLeft,
                 buttonBarRight
@@ -115,45 +103,16 @@ public class HeaderUI extends HBox implements BaseUI {
 
     @Override
     public void setupEventHandlers() {
-        btnHelp.setOnAction(event -> {
-            Notifications.create()
-                    .title(applicationPM.getI18n().getTranslationFor("header.msg.help.title").get())
-                    .text(applicationPM.getI18n().getTranslationFor("header.msg.help.message").get())
-                    .position(Pos.TOP_RIGHT)
-                    .showInformation();
-            var delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(e -> {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/frithjofhoppe/twittr-readme").toURI());
-                } catch (IOException | URISyntaxException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-            delay.playFromStart();
-        });
-        btnDe.setOnAction(e -> applicationPM.getI18n().changeLanguageTo(I18nLanguage.DE));
-        btnEn.setOnAction(e -> applicationPM.getI18n().changeLanguageTo(I18nLanguage.EN));
-        btnUndo.setOnAction(e -> applicationPM.getChangeActionService().undo());
-        btnRedo.setOnAction(e -> applicationPM.getChangeActionService().redo());
-        btnSave.setOnAction(e -> applicationPM.getdataStorage().save());
-        this.birdOverviewPM.currentSelection().addListener((observable, oldValue, newValue) -> {
-            this.btnRemove.setDisable(newValue == null);
-        });
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchDebounce.setOnFinished(event -> applicationPM.getdataStorage().search(newValue));
-            searchDebounce.playFromStart();
-        });
-        applicationPM.getI18n().getCurrentLanguage().addListener((observable, oldValue, newValue) -> changeLanguageBtnSelection(newValue));
+        btnDiscard.setOnAction(e -> {});
+        btnDownload.setOnAction(e -> {});
+        btnPixelated.setOnAction(e -> {});
+        // this.birdOverviewPM.currentSelection().addListener((observable, oldValue, newValue) -> {
+        //     this.btnGreyScale.setDisable(newValue == null);
+        // });
     }
 
     private void changeLanguageBtnSelection(I18nLanguage newValue) {
-        if (newValue.equals(I18nLanguage.EN)) {
-            btnEn.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), true);
-            btnDe.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), false);
-        } else {
-            btnDe.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), true);
-            btnEn.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), false);
-        }
+
     }
 
     @Override
@@ -163,12 +122,5 @@ public class HeaderUI extends HBox implements BaseUI {
 
     @Override
     public void setupBindings() {
-        btnSave.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.save"));
-        btnAdd.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.add"));
-        btnRemove.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.remove"));
-        btnUndo.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.undo"));
-        btnRedo.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.redo"));
-        btnHelp.textProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.help"));
-        txtSearch.promptTextProperty().bind(applicationPM.getI18n().getTranslationFor("header.actions.search"));
     }
 }

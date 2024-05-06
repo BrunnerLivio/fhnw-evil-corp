@@ -8,7 +8,7 @@ header.actions.search;Bird search
 header.actions.help;Help
 header.msg.help.title;Help page
 header.msg.help.message;A help page to a github repo will be opened shortly ...
-birdOverView.header.title;Birds of Switzerland
+birdOverView.header.title;EVIL Shit
 birdOverView.header.label.amount;Amount of bird species
 birdOverView.header.label.maxSpeed;Highest top speed
 birdOverview.table.col.name;Name

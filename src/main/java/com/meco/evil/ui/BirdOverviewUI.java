@@ -72,10 +72,10 @@ public class BirdOverviewUI extends VBox implements BaseUI<BirdOverviewPM> {
         // Header
         VBox header = new VBox();
         GridPane birdInformation = new GridPane();
-        birdInformation.add(lblSpeciesAmount, 0, 0);
-        birdInformation.add(pSpeciesAmount, 1, 0);
-        birdInformation.add(lblTopHighSpeed, 0, 1);
-        birdInformation.add(pTopHighSpeed, 1, 1);
+        // birdInformation.add(lblSpeciesAmount, 0, 0);
+        // birdInformation.add(pSpeciesAmount, 1, 0);
+        // birdInformation.add(lblTopHighSpeed, 0, 1);
+        // birdInformation.add(pTopHighSpeed, 1, 1);
         header.getChildren()
                 .addAll(
                         pTitle,
@@ -84,20 +84,11 @@ public class BirdOverviewUI extends VBox implements BaseUI<BirdOverviewPM> {
 
         handleSearchResult(appModel.getdataStorage().getSearchResult().get());
 
-        // Footer
-        HBox searchResult = new HBox();
-        searchResult.setSpacing(10);
-        searchResult.getChildren().addAll(
-                lblSearchResult,
-                pSearchResult
-        );
-
         // TODO update table when model is add to observable list
         header.setPadding(new Insets(0, 0, 30, 0));
         getChildren().addAll(
-                header,
-                birdOverviewTableUI,
-                searchResult
+                header
+                // birdOverviewTableUI,
         );
     }
 
