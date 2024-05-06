@@ -36,7 +36,7 @@ public class FileUploadOverview extends VBox {
     private Button btnSelectImage = new Button("Select Image", GlyphsDude.createIcon(FontAwesomeIcon.IMAGE));
     private ImageView imageView = new ImageView();
 
-    private Text uploadParagrpah = new Text("Upload an image or \n Drag and Drop to get started");
+    private Text uploadParagrpah = new Text("Upload an image or Drag and Drop to get started");
     private Text uploadSubText = new Text("allowed file types: .jpg, .png");
     private Rectangle2D screenBonds = Screen.getPrimary().getVisualBounds();
 
@@ -61,6 +61,7 @@ public class FileUploadOverview extends VBox {
         this.setAlignment(Pos.CENTER);
         fileUploadDropZone.setSpacing(10);
         uploadParagrpah.getStyleClass().add("upload-paragraph");
+        uploadParagrpah.setWrappingWidth(500);
         uploadSubText.getStyleClass().add("upload-paragraph-subtitle");
     }
 
