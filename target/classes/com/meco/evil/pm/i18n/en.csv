@@ -1,0 +1,41 @@
+KEY;VALUE
+header.actions.save;Save
+header.actions.add;Add
+header.actions.remove;Remove
+header.actions.undo;Undo
+header.actions.redo;Redo
+header.actions.search;Bird search
+header.actions.help;Help
+header.msg.help.title;Help page
+header.msg.help.message;A help page to a github repo will be opened shortly ...
+birdOverView.header.title;Birds of Switzerland
+birdOverView.header.label.amount;Amount of bird species
+birdOverView.header.label.maxSpeed;Highest top speed
+birdOverview.table.col.name;Name
+birdOverview.table.col.populationTrend;Population trend
+birdOverview.table.col.populationStatus;Population status
+birdOverview.table.result.label;Result count
+birdOverView.msg.createBird.title;Entry created
+birdOverView.msg.createBird.message;The new bird with a numeric name has been add. But of course you can changed it :-)
+birdOverview.msg.deleteBird.title;Delete
+birdOverview.msg.deleteBird.message;Do you really want to delete this entry?
+birdOverview.msg.saveBirds.title;Saved
+birdOverview.msg.saveBirds.message;The birds have been saved in THE file
+birdOverview.msg.saveBirdsError.title;Upps
+birdOverview.msg.saveBirdsError.message;Mhh an error occurred, please contact the developer
+birdDetail.lbl.name;Name
+birdDetail.lbl.shortDescription;Short description
+birdDetail.lbl.populationSize;Population size
+birdDetail.lbl.maximumLifeSpanInYears;Life expectancy
+birdDetail.lbl.topSpeedInKmh;Top speed
+birdDetail.lbl.weight;Weight
+birdDetail.lbl.length;Length
+birdDetail.lbl.wingspan;Wingspan
+birdDetail.lbl.continents;Continents
+birdDetail.lbl.diet;Dient
+birdDetail.lbl.seasonalBehaviour;Seasonal behaviour
+birdDetail.lbl.independentAge;Independent age
+birdDetail.lbl.populationTrend;Population trend
+birdDetail.lbl.populationStatus;Population status
+birdDetail.lbl.incubationPeriod;Incubation period
+birdDetail.lbl.imageUrl;Image Url

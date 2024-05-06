@@ -1,0 +1,41 @@
+KEY;VALUE
+header.actions.save;Speichern
+header.actions.add;Hinzufügen
+header.actions.remove;Entfernen
+header.actions.undo;Rückgängig
+header.actions.redo;Wiederherstellen
+header.actions.search;Vogel-Suche
+header.actions.help;Hilfe
+header.msg.help.title;Hilfe-Seite
+header.msg.help.message;Gleich wird im Browser eine Hilfe-Seite geöffnet ...
+birdOverView.header.title;Schweizer Vögel
+birdOverView.header.label.amount;Anzahl Vogelarten
+birdOverView.header.label.maxSpeed;Grösse Top Ges.
+birdOverview.table.col.name;Name
+birdOverview.table.col.populationTrend;Bestandstrend
+birdOverview.table.col.populationStatus;Bestandsstatus
+birdOverview.table.result.label;Anz. Resultate
+birdOverView.msg.createBird.title;Eintrag erstellt
+birdOverView.msg.createBird.message;Der neue Vogel mit einem numerischen Namen wurde erstellt. Du kannst ihn jedoch anpassen :-)
+birdOverview.msg.deleteBird.title;Löschen
+birdOverview.msg.deleteBird.message;Wollen Sie den folgenden Eintrag löschen?
+birdOverview.msg.saveBirds.title;Gespeichert
+birdOverview.msg.saveBirds.message;Die Vögel wurden in DER datei gespeichert
+birdOverview.msg.saveBirdsError.title;Upps
+birdOverview.msg.saveBirdsError.message;Mhh da ist wohl etwas schief gelaufen. Bitte den Entwickler kontaktieren
+birdDetail.lbl.name;Name
+birdDetail.lbl.shortDescription;Kurzbeschreibung
+birdDetail.lbl.populationSize;Bestandsgrösse
+birdDetail.lbl.maximumLifeSpanInYears;Max Lebenserwartung
+birdDetail.lbl.topSpeedInKmh;Top Ges.
+birdDetail.lbl.weight;Gewicht
+birdDetail.lbl.length;Länge
+birdDetail.lbl.wingspan;Spannweite
+birdDetail.lbl.continents;Kontinente
+birdDetail.lbl.diet;Ernährung
+birdDetail.lbl.seasonalBehaviour;Saisonales Verhalten
+birdDetail.lbl.independentAge;Flügge Alter
+birdDetail.lbl.populationTrend;Bestandstrend
+birdDetail.lbl.populationStatus;Bestandsstatus
+birdDetail.lbl.incubationPeriod;Brutzeit
+birdDetail.lbl.imageUrl;Bild URL
