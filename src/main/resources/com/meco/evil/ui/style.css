@@ -88,6 +88,25 @@
     -fx-background-radius: 0px;
 }
 
+.upload-paragraph {
+    -fx-font-size: 40;
+    -fx-text-fill: #757575;
+}
+
+.upload-paragraph-subtitle {
+    -fx-font-size: 20;
+    -fx-text-fill: #757575;
+}
+
+.file-upload-zone {
+    -fx-background-color: #e6e6e6;
+    -fx-width: 50%;
+    -fx-height: 50%;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-style: dashed;
+}
+
 .button:selected {
     -fx-background-color: #757575;
     -fx-text-fill: white;

@@ -28,7 +28,6 @@ import java.awt.*;
 
 public class HeaderUI extends HBox implements BaseUI {
     private ApplicationPM applicationPM;
-    private BirdOverviewPM birdOverviewPM;
     private Button btnPixelated;
     private Button btnBW;
     private Button btnGreyScale;
@@ -36,8 +35,7 @@ public class HeaderUI extends HBox implements BaseUI {
     private Button btnDiscard;
     private Button btnDownload;
 
-    public HeaderUI(BirdOverviewPM birdOverviewPM, ApplicationPM applicationPM) {
-        this.birdOverviewPM = birdOverviewPM;
+    public HeaderUI(ApplicationPM applicationPM) {
         this.applicationPM = applicationPM;
         initializeSelf();
         initializeControls();
