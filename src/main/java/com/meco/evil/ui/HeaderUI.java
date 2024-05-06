@@ -18,8 +18,8 @@ import org.controlsfx.control.textfield.CustomTextField;
 import com.meco.evil.BaseUI;
 import com.meco.evil.pm.ApplicationPM;
 import com.meco.evil.pm.BirdOverviewPM;
+import com.meco.evil.pm.i18n.I18nLanguage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -121,11 +121,11 @@ public class HeaderUI extends HBox implements BaseUI {
                     .showInformation();
             var delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(e -> {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/frithjofhoppe/twittr-readme").toURI());
-                } catch (IOException | URISyntaxException ex) {
-                    throw new RuntimeException(ex);
-                }
+                // try {
+                //     // Desktop.getDesktop().browse(new URL("https://github.com/frithjofhoppe/twittr-readme").toURI());
+                // } catch (IOException | URISyntaxException ex) {
+                //     throw new RuntimeException(ex);
+                // }
             });
             delay.playFromStart();
         });

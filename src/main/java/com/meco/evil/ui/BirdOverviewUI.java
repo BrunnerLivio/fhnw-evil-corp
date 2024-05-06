@@ -3,6 +3,8 @@ package com.meco.evil.ui;
 import com.meco.evil.BaseUI;
 import com.meco.evil.pm.ApplicationPM;
 import com.meco.evil.pm.BirdOverviewPM;
+import com.meco.evil.pm.BirdPM;
+import com.meco.evil.pm.SearchResult;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -122,10 +124,10 @@ public class BirdOverviewUI extends VBox implements BaseUI<BirdOverviewPM> {
         pTitle.textProperty().bind(appModel.getI18n().getTranslationFor("birdOverView.header.title"));
 
         lblSpeciesAmount.textProperty().bind(appModel.getI18n().getTranslationFor("birdOverView.header.label.amount"));
-        pSpeciesAmount.textProperty().bind(appModel.getdataStorage().getAmountOfBirds().map(String::valueOf));
+        // pSpeciesAmount.textProperty().bind(appModel.getdataStorage().getAmountOfBirds().map(String::valueOf));
 
         lblTopHighSpeed.textProperty().bind(appModel.getI18n().getTranslationFor("birdOverView.header.label.maxSpeed"));
-        pTopHighSpeed.textProperty().bind(appModel.getdataStorage().getMaxSpeed().map(String::valueOf));
+        // pTopHighSpeed.textProperty().bind(appModel.getdataStorage().getMaxSpeed().map(String::valueOf));
 
         // Table
         lblSearchResult.textProperty().bind(appModel.getI18n().getTranslationFor("birdOverview.table.result.label"));

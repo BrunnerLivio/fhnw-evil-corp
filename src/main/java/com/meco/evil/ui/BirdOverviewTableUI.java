@@ -2,6 +2,7 @@ package com.meco.evil.ui;
 
 import com.meco.evil.BaseUI;
 import com.meco.evil.pm.ApplicationPM;
+import com.meco.evil.pm.BirdListPM;
 import com.meco.evil.pm.BirdPM;
 
 import javafx.scene.control.TableColumn;

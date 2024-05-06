@@ -15,8 +15,7 @@ import org.controlsfx.control.Notifications;
 import com.meco.evil.pm.ApplicationPM;
 import com.meco.evil.pm.BirdOverviewPM;
 import com.meco.evil.pm.BirdPM;
-
-import java.awt.event.KeyEvent;
+import com.meco.evil.pm.Utility;
 
 
 public class ApplicationUI extends StackPane {
@@ -73,19 +72,19 @@ public class ApplicationUI extends StackPane {
         this.headerUI.btnAddOnAction().set(onChange());
         setOnKeyPressed(event -> {
             var keyCode = event.getCode().getCode();
-            if (keyCode == KeyEvent.VK_ESCAPE) {
-                mainView.setShowDetailNode(false);
-            }
-            if (!model.isBtnCtrl() && keyCode == KeyEvent.VK_CONTROL) {
-                this.model.setBtnCtrl(true);
-            }
-            if (model.isBtnCtrl() && keyCode == KeyEvent.VK_S) {
-                model.setBtnCtrl(false);
-                model.getdataStorage().save();
-            }
-            if (keyCode == KeyEvent.VK_DELETE) {
-                removeCurrentSelection();
-            }
+            // if (keyCode == KeyEvent.VK_ESCAPE) {
+            //     mainView.setShowDetailNode(false);
+            // }
+            // if (!model.isBtnCtrl() && keyCode == KeyEvent.VK_CONTROL) {
+            //     this.model.setBtnCtrl(true);
+            // }
+            // if (model.isBtnCtrl() && keyCode == KeyEvent.VK_S) {
+            //     model.setBtnCtrl(false);
+            //     model.getdataStorage().save();
+            // }
+            // if (keyCode == KeyEvent.VK_DELETE) {
+            //     removeCurrentSelection();
+            // }
         });
     }
 
