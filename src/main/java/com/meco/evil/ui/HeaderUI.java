@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import java.awt.*;
+
 public class HeaderUI extends HBox implements BaseUI {
     private ApplicationPM applicationPM;
     private BirdOverviewPM birdOverviewPM;
@@ -121,11 +123,11 @@ public class HeaderUI extends HBox implements BaseUI {
                     .showInformation();
             var delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(e -> {
-                // try {
-                //     // Desktop.getDesktop().browse(new URL("https://github.com/frithjofhoppe/twittr-readme").toURI());
-                // } catch (IOException | URISyntaxException ex) {
-                //     throw new RuntimeException(ex);
-                // }
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/frithjofhoppe/twittr-readme").toURI());
+                } catch (IOException | URISyntaxException ex) {
+                    throw new RuntimeException(ex);
+                }
             });
             delay.playFromStart();
         });

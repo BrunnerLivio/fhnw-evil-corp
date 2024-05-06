@@ -8,6 +8,8 @@ import com.meco.evil.pm.SearchResult;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,10 +27,10 @@ public class BirdOverviewUI extends VBox implements BaseUI<BirdOverviewPM> {
     private Label lblSearchResult;
     private Text pSearchResult;
     private BirdOverviewTableUI birdOverviewTableUI;
-//    private final TableView<BirdPM> table = new TableView<>();
-//    private TableColumn<BirdPM, String> name;
-//    private TableColumn<BirdPM, String> populationTrend;
-//    private TableColumn<BirdPM, String> populationStatus;
+    private final TableView<BirdPM> table = new TableView<>();
+    private TableColumn<BirdPM, String> name;
+    private TableColumn<BirdPM, String> populationTrend;
+    private TableColumn<BirdPM, String> populationStatus;
 
     public BirdOverviewUI(BirdOverviewPM birdPm, ApplicationPM appModel) {
         this.appModel = appModel;
