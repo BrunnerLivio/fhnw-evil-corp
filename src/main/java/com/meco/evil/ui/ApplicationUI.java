@@ -1,22 +1,11 @@
 package com.meco.evil.ui;
 
-import javafx.animation.PauseTransition;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 import org.controlsfx.control.MasterDetailPane;
-import org.controlsfx.control.Notifications;
-
 import com.meco.evil.pm.ApplicationPM;
-import com.meco.evil.pm.BirdOverviewPM;
-import com.meco.evil.pm.BirdPM;
-import com.meco.evil.pm.Utility;
-import java.awt.event.KeyEvent;
 
 
 public class ApplicationUI extends StackPane {

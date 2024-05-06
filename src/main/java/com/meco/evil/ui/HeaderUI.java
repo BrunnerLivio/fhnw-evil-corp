@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
 
@@ -130,8 +132,9 @@ public class HeaderUI extends HBox implements BaseUI {
             this.removeImage();
         });
         this.btnDownload.setOnAction(e -> {
-            saveImage(SwingFXUtils.fromFXImage(this.applicationPM.getCurrentProcessedImage().get(), null));
-            this.removeImage();
+            if(saveImage(SwingFXUtils.fromFXImage(this.applicationPM.getCurrentProcessedImage().get(), null))) {
+                this.removeImage();
+            }
         });
     }
 
@@ -140,23 +143,33 @@ public class HeaderUI extends HBox implements BaseUI {
         this.applicationPM.getImageIsBw().set(false);
         this.applicationPM.getImageIsGrayscale().set(false);
         this.applicationPM.getImageIsPixelated().set(false);
+        this.applicationPM.getCurrentFileMetadata().set(null);
     }
 
-    private void saveImage(BufferedImage bufferedImage) {
+    private boolean saveImage(BufferedImage bufferedImage) {
         FileChooser fileChooser = new FileChooser();
+        var fileType = this.applicationPM.getCurrentFileMetadata().get().getMimeType();
         fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-
+                .add(new FileChooser.ExtensionFilter("Image Files", String.format("*.%s", "png")));
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        fileChooser.setInitialFileName(String.format(
+            "%s_%s.%s",
+            this.applicationPM.getCurrentFileMetadata().get().getFileName(),
+            timestamp,
+            fileType
+            )
+        );
         // Show save file dialog
         File file = fileChooser.showSaveDialog(new Stage());
-
         if (file != null) {
             try {
                 ImageIO.write(bufferedImage, "png", file);
+                return true;
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
+        return false;
     }
 
     private void changeLanguageBtnSelection(I18nLanguage newValue) {

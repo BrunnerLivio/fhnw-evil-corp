@@ -2,16 +2,11 @@ package com.meco.evil.ui;
 
 import java.io.File;
 
-import org.controlsfx.glyphfont.Glyph;
-
-import com.meco.evil.BaseUI;
 import com.meco.evil.filters.BlackAndWhiteFilter;
 import com.meco.evil.filters.GrayscaleFilter;
 import com.meco.evil.filters.PixelatedFilter;
 import com.meco.evil.pm.ApplicationPM;
-import com.meco.evil.pm.BirdListPM;
-import com.meco.evil.pm.BirdPM;
-import com.meco.evil.pm.FilePM;
+import com.meco.evil.pm.FileMetadata;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -20,21 +15,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelFormat;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -43,10 +25,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javafx.scene.image.WritableImage;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.PixelFormat;
-import java.nio.ByteBuffer;
+import java.nio.file.Files;
 
 public class FileUploadOverview extends VBox {
     private final ApplicationPM appModel;
@@ -57,7 +36,7 @@ public class FileUploadOverview extends VBox {
     private Button btnSelectImage = new Button("Select Image", GlyphsDude.createIcon(FontAwesomeIcon.IMAGE));
     private ImageView imageView = new ImageView();
 
-    private Text uploadParagrpah = new Text("Upload an image or Drag and Drop to get started");
+    private Text uploadParagrpah = new Text("Upload an image or \n Drag and Drop to get started");
     private Text uploadSubText = new Text("allowed file types: .jpg, .png");
     private Rectangle2D screenBonds = Screen.getPrimary().getVisualBounds();
 
@@ -100,12 +79,19 @@ public class FileUploadOverview extends VBox {
     public BufferedImage uploadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
         File file = fileChooser.showOpenDialog(new Stage());
 
         if (file != null) {
             try {
+                // File MIME type
+                this.appModel.getCurrentFileMetadata().set(
+                        new FileMetadata(
+                            file.getName().split("\\.")[0],
+                            Files.probeContentType(file.toPath()).split("/")[1]
+                        )
+                );
                 BufferedImage bufferedImage = ImageIO.read(file);
                 return bufferedImage;
             } catch (IOException ex) {

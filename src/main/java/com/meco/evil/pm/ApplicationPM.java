@@ -22,6 +22,7 @@ public class ApplicationPM {
     private final BooleanProperty imageIsGrayscale = new SimpleBooleanProperty(false);
     private final ObjectProperty<Image> currentImage = new SimpleObjectProperty<>();
     private final ObjectProperty<Image> currentProcessedImage = new SimpleObjectProperty<>();
+    private final ObjectProperty<FileMetadata> currentFileMetadata = new SimpleObjectProperty<>();
 
     private final ChangeActionService changeActionService = new ChangeActionService();
     private final BirdListPM dataStorageService = new BirdListPM("birds_of_switzerland.tsv", changeActionService, this);
@@ -100,5 +101,9 @@ public class ApplicationPM {
 
     public ObjectProperty<Image> getCurrentProcessedImage() {
         return currentProcessedImage;
+    }
+
+    public ObjectProperty<FileMetadata> getCurrentFileMetadata() {
+        return currentFileMetadata;
     }
 }
